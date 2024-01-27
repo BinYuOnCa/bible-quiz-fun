@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="'viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Web Page</title>
+</head>
+
+<body>
+    <h1> Quiz Practise - {{book_name}} </h1>
+
+     <form method="post" action="{{ url_for('index') }}">
+ <!--       <label for="user_input">Enter text:</label>
+        <input type="text" id="user_input" name="user_input" required>
+     -->
+        <button type="submit" name="action" value="key">Random Key - single word</button>
+        <button type="submit" name="action" value="key2">Random Keys - two words</button>
+        <button type="submit" name="action" value="result">Show Result</button>
+    </form>
+
+    {% if user_input %}
+        <p> Key: {{user_input}}</p>
+<!--        {% if action == 'result' %}
+            <p>Verses: {{ quote_txt }}</p>
+        {% elif action == 'uppercase' %}
+            <p>Uppercase: {{ user_input.upper() }}</p>
+        {% elif action == 'lowercase' %}
+            <p>Lowercase: {{ user_input.lower() }}</p>
+        {% endif %}
+    -->
+    {% endif %}
+
+    {% if quote_txt %}
+        <p> Quote: {{quote_txt}} </p>
+    {% endif %}
+
+
+</body>
+</html>
