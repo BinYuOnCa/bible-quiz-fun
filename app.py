@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 from quiz import quiz
+import re
 import os
 
 app = Flask(__name__)
@@ -21,7 +22,7 @@ def index():
     # print('Dumped to request.dump....')
     # print(f"in app.py: {os.getcwd()=}")
     # print(f"{os.path.realpath(__file__)=}")
-    user_input = None
+    random_key = None
     # action = None
     quote_text = None
     book_name =  quiz.book_name
@@ -29,17 +30,19 @@ def index():
     if request.method == 'POST':
         action = request.form.get('action','')
         if action == 'key':
-            user_input = quiz.rand_keyword()
-            print(f"POST: {user_input=},{action=},{quote_text=}")
+            random_key = quiz.rand_keyword()
+            print(f"POST: {random_key=},{action=},{quote_text=}")
         elif action == 'result':
             user_input = request.form.get('user_input', '')
+            random_key = quiz.active_key_word
             quote_text = quiz.quote_for_key(user_input)
             print(f"POST: {user_input=},{action=},{quote_text=}")
 
     return render_template('index.html',
-                           user_input=user_input,
+                           user_input=random_key,
                            quote_txt=quote_text,
-                           book_name = book_name,)
+                           book_name=book_name,
+                           )
 
 
 if __name__ == '__main__':

@@ -32,7 +32,7 @@ class Quiz:
             self.book_name = book_name
         self.init()
         file_name = path.join(self.txt_folder, f"{self.book_name}-{self.book_version}.txt")
-        print(f"{file_name=}")
+        # print(f"{file_name=}")
         with open(file_name, 'rt',  encoding='utf-8-sig') as fn:
             self.full_text = fn.read()
             lines = [x for x in self.full_text.splitlines() if x > '']
@@ -74,7 +74,8 @@ class Quiz:
         verse = self.keyword[words][0]
         quote = self.quotes[verse]
         # print(f"{'-'*10}In quiz.quote_for_key {'-'*20}\n {words=}, {verse=}, {quote=}")
-        return quote
+        return re.sub(fr'( {verse} | {words} )',
+                      r'<b style="color:red;">\1</b>', quote)
 
 
 quiz = Quiz()
